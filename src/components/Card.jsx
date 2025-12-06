@@ -29,7 +29,7 @@ const Card = () => {
     useEffect(() => {
         if (!nextPrayer) return;
 
-        setRemaining(getRemainingTime(nextPrayer.date)); // initial update
+        setRemaining(getRemainingTime(nextPrayer.date)); 
 
         const interval = setInterval(() => {
             setRemaining(getRemainingTime(nextPrayer.date));
@@ -37,9 +37,6 @@ const Card = () => {
 
         return () => clearInterval(interval);
     }, [timings]);
-
-    // if there is not timing data then it reurn from here
-    if(!timings) return null;
 
      // it determine active prayer
      const prayersOrder = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
@@ -52,6 +49,8 @@ const Card = () => {
         d.setHours(h, m, 0, 0);
         return d;
     };
+
+    if(!timings) return;
 
     // Determine current (active) prayer
     let currentPrayer = "Fajr"; // default
