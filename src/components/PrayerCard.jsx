@@ -1,4 +1,5 @@
-const PrayerCard = ({name, time, Icon, isActive}) => {
+
+const PrayerCard = ({name, time, Icon, isActive, timings}) => {
     return (
         <div className={` ${isActive ? "text-white text-md" : "text-white/40"}`}>
             <Icon className="mx-auto" size={25}/>

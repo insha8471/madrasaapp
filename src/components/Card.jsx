@@ -6,6 +6,7 @@ import PrayerCardHeader from "./PrayerCardHeader";
 import { convert24to12 } from "../utils/timeFormat";
 import { getNextPrayerTime, getRemainingTime } from "../utils/getNextPrayerTime";
 import { iconMap, prayerColors, prayerTimingFormat } from "../utils/helper";
+import TymingArc from "./TymingArc";
 
 const Card = () => {
     const {city, country} = useLocationStore();
@@ -71,11 +72,11 @@ const Card = () => {
 
     return (
         <div className="p-2">
-        <div className={`mt-4 p-6 rounded-xl border border-purple-300 hover:shadow-lg transiton w-full lg:w-100 
-        bg-gradient-to-b ${prayerColors[currentPrayer]} h-80`}>
+        <div className={`mt-4 px-6 pt-6 rounded-xl border border-purple-300 hover:shadow-lg transiton w-full lg:w-100 
+        bg-gradient-to-b ${prayerColors[currentPrayer]} `}>
             <div>
                 <div>
-                    <PrayerCardHeader Icon={iconMap[nextPrayer?.name]} name={nextPrayer?.name} remainingTime={remaining} weekday={weekday} />
+                    <PrayerCardHeader Icon={iconMap[nextPrayer?.name]} name={nextPrayer?.name} remainingTime={remaining} weekday={weekday} timings={timings}/>
                 </div>
 
                 <div className="flex mx-auto items-center justify-between mt-2 p-2 gap-1">
@@ -85,12 +86,12 @@ const Card = () => {
                             name={p} 
                             time={convert24to12(timings[p])} 
                             Icon={iconMap[p]} 
-                            isActive={p === nextPrayer.name} // highlight current prayer
+                            isActive={p === currentPrayer} // highlight current prayer
                         />
                     ))}
                 </div>
             </div>
-            
+            <TymingArc timings={timings} />
         </div>
         </div>
     )
