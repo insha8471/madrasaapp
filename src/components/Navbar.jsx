@@ -26,7 +26,7 @@ const Navbar = () => {
 
                 {/*  user location */}
                 <div className="flex flex-col items-end font-poppins cursor-pointer" onClick={handleLocationClick}>
-                    <p className="text-black-500 text-md md:text-md font-bold">Select Location</p>
+                    <p className="text-black-500 text-md md:text-md font-bold">{city ? "Your Location" : "Select Location"}</p>
                     <h3 className="text-purple-500 text-sm flex items-center gap-1"> <span><MapPinLineIcon size={15} weight="fill"/></span> { loading ? "Refreshing Location" : `${city}, ${country}` || "Get accurate namaz time" } </h3>
                 </div>
 
