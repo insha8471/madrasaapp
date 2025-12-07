@@ -74,7 +74,7 @@ const sweep = (end - start - gap * (total - 1)) / total;
 
   return (
     <div className="w-full flex justify-center items-center mt-3">
-      <svg width={WIDTH} height={220}>
+      <motion.svg width={WIDTH} height={220} initial={{ opacity: 0, y: 8, scale: 0.995 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.6, ease: "easeOut" }}>
         {Array.from({ length: 5 }).map((_, i) => {
           const s = start + i * (sweep + gap);
           const e = s + sweep;
@@ -101,7 +101,9 @@ const sweep = (end - start - gap * (total - 1)) / total;
                 stroke="#ffffff33"
                 strokeWidth={STROKE}
                 strokeLinecap="round"
-                opacity={0.45}
+                initial={{ opacity: 0, pathLength: 0 }}
+                animate={{ opacity: 0.45, pathLength: 1 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.08 }}
               />
 
               <motion.path
@@ -111,14 +113,15 @@ const sweep = (end - start - gap * (total - 1)) / total;
                 strokeWidth={STROKE}
                 strokeLinecap="round"
                 strokeDasharray={arcLen}
-                strokeDashoffset={-arcLen * (1 - progress)}
+                initial={{ strokeDashoffset: arcLen, opacity: 0 }}
+                animate={{ strokeDashoffset: -arcLen * (1 - progress), opacity: 1 }}
+                transition={{ duration: 0.9, ease: "easeOut", delay: 0.12 + i * 0.08 }}
                 style={{ transformOrigin: `${CENTER_X}px ${CENTER_Y}px` }}
-                transition={{ duration: 0.6 }}
               />
             </g>
           );
         })}
-      </svg>
+      </motion.svg>
     </div>
   );
 
