@@ -1,5 +1,3 @@
-import ArcGlow from "./ArcGlow";
-
 const PrayerCard = ({name, time, Icon, isActive}) => {
     return (
         <div className={` ${isActive ? "text-white text-md" : "text-slate-200"}`}>
