@@ -90,6 +90,7 @@ const Card = () => {
                         />
                     ))}
                 </div>
+                
             </div>
             <TymingArc timings={timings} />
         </div>

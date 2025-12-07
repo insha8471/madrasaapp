@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { parseTime, getProgress } from "../utils/helper";
 
-const ARC_RADIUS = 120;
-const STROKE = 16;
+const ARC_RADIUS = 170;
+const STROKE = 16
 const ORDER = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
 
 // convert angle to SVG arc coordinates
@@ -59,13 +59,13 @@ function TymingArc({ timings }) {
   }, [timings, now]);
 
   // Make arc full width of the card
-const WIDTH = 320; // SVG width (wider to match design)
+const WIDTH = 360; // SVG width (wider to match design)
 const CENTER_X = WIDTH / 2;
-const CENTER_Y = 200; // move center lower to stretch arc
-const start = -200; // widen left
-const end = 20; // widen right
+const CENTER_Y = 190; // move center lower to stretch arc
+const start = -180; // widen left
+const end = 0; // widen right
 const total = 5;
-const gap = 14;
+const gap = 12;
 
 // new sweep calculation
 const sweep = (end - start - gap * (total - 1)) / total;
@@ -73,8 +73,8 @@ const sweep = (end - start - gap * (total - 1)) / total;
 // no center timing text — progress is shown by the arc itself
 
   return (
-    <div className="w-full flex justify-center items-center mt-3">
-      <motion.svg width={WIDTH} height={220} initial={{ opacity: 0, y: 8, scale: 0.995 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.6, ease: "easeOut" }}>
+    <div className="w-full flex justify-center items-center z-1">
+      <svg width={WIDTH} height={180} viewBox={`0 0 ${WIDTH} 180`}>
         {Array.from({ length: 5 }).map((_, i) => {
           const s = start + i * (sweep + gap);
           const e = s + sweep;
@@ -101,9 +101,7 @@ const sweep = (end - start - gap * (total - 1)) / total;
                 stroke="#ffffff33"
                 strokeWidth={STROKE}
                 strokeLinecap="round"
-                initial={{ opacity: 0, pathLength: 0 }}
-                animate={{ opacity: 0.45, pathLength: 1 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.08 }}
+                opacity={0.45}
               />
 
               <motion.path
@@ -113,15 +111,15 @@ const sweep = (end - start - gap * (total - 1)) / total;
                 strokeWidth={STROKE}
                 strokeLinecap="round"
                 strokeDasharray={arcLen}
-                initial={{ strokeDashoffset: arcLen, opacity: 0 }}
-                animate={{ strokeDashoffset: -arcLen * (1 - progress), opacity: 1 }}
-                transition={{ duration: 0.9, ease: "easeOut", delay: 0.12 + i * 0.08 }}
+                initial={{ strokeDashoffset: arcLen }}
+                animate={{ strokeDashoffset: -arcLen * (1 - progress) }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
                 style={{ transformOrigin: `${CENTER_X}px ${CENTER_Y}px` }}
               />
             </g>
           );
         })}
-      </motion.svg>
+      </svg>
     </div>
   );
 
