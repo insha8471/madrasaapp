@@ -85,7 +85,7 @@ const Card = () => {
                             name={p} 
                             time={convert24to12(timings[p])} 
                             Icon={iconMap[p]} 
-                            isActive={p === currentPrayer} // highlight current prayer
+                            isActive={p === nextPrayer.name} // highlight current prayer
                         />
                     ))}
                 </div>
